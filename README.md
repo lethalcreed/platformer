@@ -5,3 +5,6 @@ Dit is een leeg VS Code project met de volgende instellingen:
 - DEV folder bevat de typescript files
 - tsconfig.json bevat instellingen voor het compileren naar javascript
 - tasks.json bevat het 'build' commando. Dit voer je uit met CMD+SHIFT+B
+=======
+# platformer
+A platformer build for the subject PRG08
