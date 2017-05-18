@@ -1,0 +1,95 @@
+body {
+    background-color: forestgreen;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow:hidden;
+    margin:0px; padding:0px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+body * {
+    position: absolute;
+    display: block;
+    margin:0px; padding:0px;
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+}
+
+gamebutton {
+    border-radius:5px;
+    padding:10px;
+    background-color: blue;
+    color:white;
+    font-size:22px;
+    cursor: pointer;
+    left:40%; top:30%;
+}
+
+gamebutton:hover {
+    background-color: white;
+    color:blue;
+}
+
+container {
+    background-repeat: no-repeat;
+    width:800px; height:600px;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    overflow:hidden;
+}
+
+start{
+    width: 800px;
+    height: 600px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-image: url(../images/start.gif);
+}
+gameover{
+    width: 800px;
+    height: 600px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-image: url(../images/gameover.jpg);
+}
+level1{
+    width: inherit;
+    height:inherit;
+    background-repeat: no-repeat;
+    background-size: 150%;
+    background-image: url(../images/base.png);
+}
+
+start_character{
+    background-image: url(../images/idle.gif);
+    background-size: 100%;
+    width: 39px;
+    height: 60px;
+    top: 58%;
+    left: 50%;
+}
+
+hat{
+    width: 24px;
+    height: 12px;
+    background-size: 100%;
+    background-image: url(../images/character/hat.png);
+}
+
+character{
+    width: 26px;
+    height: 40px;
+    background-size: 100%;
+}
+
+.idle{
+    background-image: url(../images/character/idle.gif);
+}
+.jumping{
+    background-image: url(../images/character/jumping.png);
+}
+.running{
+    background-image: url(../images/character/running.gif);
+}
+.dying{
+    background-image: url(../images/character/dying.png);
+}
