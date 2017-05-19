@@ -20,11 +20,11 @@ class Character {
         this.height = 40;
         this.xspeed = 0;
         this.yspeed = 0;
-        // Base 1 values
+        // Base 1 (background) start values
         // this.x = 100;
         // this.y = 402;
 
-        // Base 2 values
+        // Base 2 (background) start values
         this.x = 50;
         this.y = 465;
 
