@@ -9,10 +9,12 @@ var Character = (function () {
         this.div = document.createElement("character");
         parent.appendChild(this.div);
         this.behaviour = new Idle(this);
+        this.width = 24;
+        this.height = 40;
         this.xspeed = 0;
         this.yspeed = 0;
-        this.x = 100;
-        this.y = 402;
+        this.x = 50;
+        this.y = 465;
         this.hat = new Hat(this.div);
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
         window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
@@ -79,15 +81,6 @@ var Game = (function () {
     };
     return Game;
 }());
-var GameObject = (function () {
-    function GameObject(x, y, w, h) {
-        this.x = x;
-        this.y = y;
-        this.width = w;
-        this.height = h;
-    }
-    return GameObject;
-}());
 var Hat = (function () {
     function Hat(parent) {
         this.div = document.createElement("hat");
@@ -105,6 +98,17 @@ var Hat = (function () {
 window.addEventListener("load", function () {
     Game.getInstance();
 });
+var Utilities = (function () {
+    function Utilities() {
+    }
+    Utilities.checkPlayerColission = function (p, o) {
+        return (p.x < o.x + o.width &&
+            p.x + p.width > o.x &&
+            p.y < o.y + o.height &&
+            p.height + p.y > o.y);
+    };
+    return Utilities;
+}());
 var Dying = (function () {
     function Dying(c) {
         this.jumpDirection = -3;
@@ -213,10 +217,10 @@ var Running = (function () {
         this.char.div.className = "running";
         this.direction = direction;
         if (this.direction == "right") {
-            this.char.xspeed = 1;
+            this.char.xspeed = 2;
         }
         else if (this.direction == "left") {
-            this.char.xspeed = -1;
+            this.char.xspeed = -2;
         }
     }
     Running.prototype.draw = function () {
@@ -224,10 +228,10 @@ var Running = (function () {
     };
     Running.prototype.onKeyDown = function (e) {
         if (e.key == 'ArrowRight' && this.char.behaviour instanceof Running) {
-            this.char.xspeed = 1;
+            this.char.xspeed = 2;
         }
         if (e.key == 'ArrowLeft' && this.char.behaviour instanceof Running) {
-            this.char.xspeed = -1;
+            this.char.xspeed = -2;
         }
         if (e.key == ' ' && this.char.behaviour instanceof Running) {
             this.char.behaviour = new Jumping(this.char, "running", this.direction);
@@ -245,6 +249,27 @@ var Running = (function () {
     };
     return Running;
 }());
+var GameObject = (function () {
+    function GameObject(parent, name, x, y, w, h) {
+        this.x = x;
+        this.y = y;
+        this.width = w;
+        this.height = h;
+        this.div = document.createElement(name);
+        parent.appendChild(this.div);
+    }
+    GameObject.prototype.draw = function () {
+        this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";
+    };
+    return GameObject;
+}());
+var Spike = (function (_super) {
+    __extends(Spike, _super);
+    function Spike(parent, x, y) {
+        _super.call(this, parent, "spike", x, y, 20, 20);
+    }
+    return Spike;
+}(GameObject));
 var GameOver = (function (_super) {
     __extends(GameOver, _super);
     function GameOver() {
@@ -266,15 +291,31 @@ var Level1 = (function (_super) {
     function Level1() {
         var _this = this;
         _super.call(this, "level1");
+        this.deathttrigger = false;
         Game.audio = new Audio("sounds/level1.mp3");
+        Game.audio.play();
         Game.audio.loop = true;
         this.div.id = "current_level";
         this.character = new Character(this.div);
+        this.spikes = new Array();
+        for (var i = 0; i < 3; i++) {
+            this.spikes.push(new Spike(this.div, (200 + (i * 200)), 485));
+        }
         requestAnimationFrame(function () { return _this.gameLoop(); });
     }
     Level1.prototype.gameLoop = function () {
         var _this = this;
         this.character.draw();
+        for (var _i = 0, _a = this.spikes; _i < _a.length; _i++) {
+            var spike = _a[_i];
+            spike.draw();
+            if (Utilities.checkPlayerColission(this.character, spike)) {
+                if (this.deathttrigger == false) {
+                    this.character.behaviour = new Dying(this.character);
+                    this.deathttrigger = true;
+                }
+            }
+        }
         requestAnimationFrame(function () { return _this.gameLoop(); });
     };
     return Level1;

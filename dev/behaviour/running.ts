@@ -9,9 +9,9 @@ class Running implements Behaviour {
         this.direction = direction;
 
         if (this.direction == "right") {
-            this.char.xspeed = 1;
+            this.char.xspeed = 2;
         } else if (this.direction == "left") {
-            this.char.xspeed = -1;
+            this.char.xspeed = -2;
         }
     }
 
@@ -21,10 +21,10 @@ class Running implements Behaviour {
 
     onKeyDown(e: KeyboardEvent) {
         if (e.key == 'ArrowRight' && this.char.behaviour instanceof Running) {
-            this.char.xspeed = 1;
+            this.char.xspeed = 2;
         }
         if (e.key == 'ArrowLeft' && this.char.behaviour instanceof Running) {
-            this.char.xspeed = -1;
+            this.char.xspeed = -2;
         }
         if (e.key == ' ' && this.char.behaviour instanceof Running) {
             this.char.behaviour = new Jumping(this.char, "running", this.direction);

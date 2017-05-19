@@ -7,6 +7,8 @@ class Character {
     public hat: Hat;
     public xspeed: number;
     public yspeed: number;
+    public width:number;
+    public height: number;
 
     constructor(parent: HTMLElement) {
         this.div = document.createElement("character");
@@ -14,10 +16,17 @@ class Character {
 
         this.behaviour = new Idle(this);
 
+        this.width = 24;
+        this.height = 40;
         this.xspeed = 0;
         this.yspeed = 0;
-        this.x = 100;
-        this.y = 402;
+        // Base 1 values
+        // this.x = 100;
+        // this.y = 402;
+
+        // Base 2 values
+        this.x = 50;
+        this.y = 465;
 
         this.hat = new Hat(this.div);
 
