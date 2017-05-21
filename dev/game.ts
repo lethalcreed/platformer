@@ -1,7 +1,7 @@
 /// <reference path="screens/startscreen.ts"/>
 
 class Game {
-    private screen: any;
+    private screen: BaseScreen;
 
     private static instance: Game;
     private score:number = 0;

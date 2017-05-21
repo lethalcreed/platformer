@@ -12,7 +12,7 @@ class GameOver extends BaseScreen {
 
     }
 
-    onClick(): void {
+    private onClick(): void {
         console.log("retry");
         this.div.remove();
         Game.getInstance().showStartScreen();

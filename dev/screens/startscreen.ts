@@ -17,7 +17,7 @@ class StartScreen extends BaseScreen {
 
     }
 
-    onStartClick(): void {
+    private onStartClick(): void {
         this.div.remove();
         Game.getInstance().showLevel1();
     }
