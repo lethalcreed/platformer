@@ -10,7 +10,8 @@ Dit is een Platformer project met de volgende instellingen:
 - tsconfig.json bevat instellingen voor het compileren naar javascript
 - tasks.json bevat het 'build' commando. Dit voer je uit met CMD+SHIFT+B
 
-Om dit project te installeren kun je een fork doen van de branch. Deze map moet je dan op jou localhost plaatsen. Afhankelijk van welk programma je gebruikt. 
+Om dit project te installeren kun je een fork doen van de repository. Deze map moet je dan op jou localhost plaatsen. Afhankelijk van welk programma je gebruikt. 
+Daarna moet je de TS files compilen. Deze komen dan terecht in de Docs folder. Door naar deze folder te navigeren kun je de game lokaal bekijken.
 
 Sidenotes:
 - De muziek is eventueel uit te zetten door Game.Audio.play(); uit te commenten in screens/level1.ts op regel 12.
@@ -29,4 +30,8 @@ PRG04:
 -   Encapsulation: Overal. Ieder variabele is private, public of protected gemaakt. 
 -   Composition: De character heeft een hat. Dit is te vinden in character.ts en hat.ts
 -   Inheritance: Het gameobject spike erft over van gameobjects.ts. Deze zijn te vinden in de map Gameobjects.
+
+Klassendiagram:
+
+![Klassendiagram](Platformer%20%PRG08.png?raw=true "Klassendiagram")
 
