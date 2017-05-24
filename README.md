@@ -33,5 +33,5 @@ PRG04:
 
 Klassendiagram:
 
-![Klassendiagram](Platformer%20%PRG08.png?raw=true "Klassendiagram")
+![Klassendiagram](Platformer%20PRG08.png?raw=true "Klassendiagram")
 
