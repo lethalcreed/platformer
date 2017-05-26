@@ -5,23 +5,20 @@ class Idle implements Behaviour {
         this.char = c;
     }
 
-    draw() {
-        this.char.xspeed = 0;
-        this.char.div.className = "idle";
-    }
-
-    onKeyDown(e: KeyboardEvent) {
-        if (e.key == ' ' && this.char.behaviour instanceof Idle) {
+    update() {
+        if (this.char.keyState[32]) {
             this.char.behaviour = new Jumping(this.char, "idle", "idle");
-        } else if (e.key == 'ArrowRight' && this.char.behaviour instanceof Idle) {
-            this.char.behaviour = new Running(this.char, "right");
-        } else if (e.key == 'ArrowLeft' && this.char.behaviour instanceof Idle) {
+        } else if (this.char.keyState[37]) {
             this.char.behaviour = new Running(this.char, "left");
-        } else if (e.key == 'Control' && this.char.behaviour instanceof Idle) {
+        } else if (this.char.keyState[39]) {
+            this.char.behaviour = new Running(this.char, "right");
+        } else if (this.char.keyState[17]) {
             this.char.behaviour = new Dying(this.char);
         }
     }
-    onKeyUp(e: KeyboardEvent) {
 
+    draw() {
+        this.char.xspeed = 0;
+        this.char.div.className = "idle";
     }
 }
