@@ -9,35 +9,35 @@ class Running implements Behaviour {
         this.direction = direction;
 
         if (this.direction == "right") {
-            this.char.xspeed = 2;
+            Character.xspeed = 1;
         } else if (this.direction == "left") {
-            this.char.xspeed = -2;
+            Character.xspeed = -1;
         }
     }
 
     draw() {
-        this.char.x += this.char.xspeed;
+        this.char.x += Character.xspeed;
     }
 
     onKeyDown(e: KeyboardEvent) {
-        if (e.key == 'ArrowRight' && this.char.behaviour instanceof Running) {
-            this.char.xspeed = 2;
+        if (e.keyCode == Enumeration.Keys.RIGHT && this.char.behaviour instanceof Running) {
+            Character.xspeed = 1;
         }
-        if (e.key == 'ArrowLeft' && this.char.behaviour instanceof Running) {
-            this.char.xspeed = -2;
+        if (e.keyCode == Enumeration.Keys.LEFT && this.char.behaviour instanceof Running) {
+            Character.xspeed = -1;
         }
-        if (e.key == ' ' && this.char.behaviour instanceof Running) {
+        if (e.keyCode == Enumeration.Keys.JUMP && this.char.behaviour instanceof Running) {
             this.char.behaviour = new Jumping(this.char, "running", this.direction);
         }
     }
 
     onKeyUp(e: KeyboardEvent) {
-        if (e.key == 'ArrowRight' && this.char.behaviour instanceof Running) {
-            this.char.xspeed = 0;
+        if (e.keyCode == Enumeration.Keys.RIGHT && this.char.behaviour instanceof Running) {
+            Character.xspeed = 0;
             this.char.behaviour = new Idle(this.char);
         }
-        if (e.key == 'ArrowLeft' && this.char.behaviour instanceof Running) {
-            this.char.xspeed = 0;
+        if (e.keyCode == Enumeration.Keys.LEFT && this.char.behaviour instanceof Running) {
+            Character.xspeed = 0;
             this.char.behaviour = new Idle(this.char);
         }
     }

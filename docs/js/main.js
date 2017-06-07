@@ -11,7 +11,7 @@ var Character = (function () {
         this.behaviour = new Idle(this);
         this.width = 24;
         this.height = 40;
-        this.xspeed = 0;
+        Character.xspeed = 0;
         this.yspeed = 0;
         this.x = 50;
         this.y = 465;
@@ -32,6 +32,15 @@ var Character = (function () {
     };
     return Character;
 }());
+var Enumeration;
+(function (Enumeration) {
+    (function (Keys) {
+        Keys[Keys["LEFT"] = 37] = "LEFT";
+        Keys[Keys["RIGHT"] = 39] = "RIGHT";
+        Keys[Keys["JUMP"] = 32] = "JUMP";
+    })(Enumeration.Keys || (Enumeration.Keys = {}));
+    var Keys = Enumeration.Keys;
+})(Enumeration || (Enumeration = {}));
 var BaseScreen = (function () {
     function BaseScreen(name) {
         this.div = document.createElement(name);
@@ -144,21 +153,18 @@ var Idle = (function () {
         this.char = c;
     }
     Idle.prototype.draw = function () {
-        this.char.xspeed = 0;
+        Character.xspeed = 0;
         this.char.div.className = "idle";
     };
     Idle.prototype.onKeyDown = function (e) {
-        if (e.key == ' ' && this.char.behaviour instanceof Idle) {
+        if (e.keyCode == Enumeration.Keys.JUMP && this.char.behaviour instanceof Idle) {
             this.char.behaviour = new Jumping(this.char, "idle", "idle");
         }
-        else if (e.key == 'ArrowRight' && this.char.behaviour instanceof Idle) {
+        else if (e.keyCode == Enumeration.Keys.RIGHT && this.char.behaviour instanceof Idle) {
             this.char.behaviour = new Running(this.char, "right");
         }
-        else if (e.key == 'ArrowLeft' && this.char.behaviour instanceof Idle) {
+        else if (e.keyCode == Enumeration.Keys.LEFT && this.char.behaviour instanceof Idle) {
             this.char.behaviour = new Running(this.char, "left");
-        }
-        else if (e.key == 'Control' && this.char.behaviour instanceof Idle) {
-            this.char.behaviour = new Dying(this.char);
         }
     };
     Idle.prototype.onKeyUp = function (e) {
@@ -176,11 +182,11 @@ var Jumping = (function () {
         this.char.div.className = "jumping";
     }
     Jumping.prototype.draw = function () {
-        this.char.x += this.char.xspeed;
+        this.char.x += Character.xspeed;
         this.char.y += this.jumpDirection;
         if (this.ydirection == "up") {
             this.jumpHeight++;
-            if (this.jumpHeight > 35) {
+            if (this.jumpHeight > 40) {
                 this.ydirection = "down";
             }
         }
@@ -202,10 +208,10 @@ var Jumping = (function () {
     Jumping.prototype.onKeyDown = function (e) {
     };
     Jumping.prototype.onKeyUp = function (e) {
-        if (e.key == 'ArrowRight' && this.char.behaviour instanceof Jumping) {
+        if (e.keyCode == Enumeration.Keys.RIGHT && this.char.behaviour instanceof Jumping) {
             this.previous_state = "idle";
         }
-        if (e.key == 'ArrowLeft' && this.char.behaviour instanceof Jumping) {
+        if (e.keyCode == Enumeration.Keys.LEFT && this.char.behaviour instanceof Jumping) {
             this.previous_state = "idle";
         }
     };
@@ -217,33 +223,33 @@ var Running = (function () {
         this.char.div.className = "running";
         this.direction = direction;
         if (this.direction == "right") {
-            this.char.xspeed = 2;
+            Character.xspeed = 1;
         }
         else if (this.direction == "left") {
-            this.char.xspeed = -2;
+            Character.xspeed = -1;
         }
     }
     Running.prototype.draw = function () {
-        this.char.x += this.char.xspeed;
+        this.char.x += Character.xspeed;
     };
     Running.prototype.onKeyDown = function (e) {
-        if (e.key == 'ArrowRight' && this.char.behaviour instanceof Running) {
-            this.char.xspeed = 2;
+        if (e.keyCode == Enumeration.Keys.RIGHT && this.char.behaviour instanceof Running) {
+            Character.xspeed = 1;
         }
-        if (e.key == 'ArrowLeft' && this.char.behaviour instanceof Running) {
-            this.char.xspeed = -2;
+        if (e.keyCode == Enumeration.Keys.LEFT && this.char.behaviour instanceof Running) {
+            Character.xspeed = -1;
         }
-        if (e.key == ' ' && this.char.behaviour instanceof Running) {
+        if (e.keyCode == Enumeration.Keys.JUMP && this.char.behaviour instanceof Running) {
             this.char.behaviour = new Jumping(this.char, "running", this.direction);
         }
     };
     Running.prototype.onKeyUp = function (e) {
-        if (e.key == 'ArrowRight' && this.char.behaviour instanceof Running) {
-            this.char.xspeed = 0;
+        if (e.keyCode == Enumeration.Keys.RIGHT && this.char.behaviour instanceof Running) {
+            Character.xspeed = 0;
             this.char.behaviour = new Idle(this.char);
         }
-        if (e.key == 'ArrowLeft' && this.char.behaviour instanceof Running) {
-            this.char.xspeed = 0;
+        if (e.keyCode == Enumeration.Keys.LEFT && this.char.behaviour instanceof Running) {
+            Character.xspeed = 0;
             this.char.behaviour = new Idle(this.char);
         }
     };
@@ -259,6 +265,7 @@ var GameObject = (function () {
         parent.appendChild(this.div);
     }
     GameObject.prototype.draw = function () {
+        this.x -= 1;
         this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";
     };
     return GameObject;
@@ -266,7 +273,7 @@ var GameObject = (function () {
 var Spike = (function (_super) {
     __extends(Spike, _super);
     function Spike(parent, x, y) {
-        _super.call(this, parent, "spike", x, y, 20, 20);
+        _super.call(this, parent, "spike", x, y, 20, 15);
     }
     return Spike;
 }(GameObject));

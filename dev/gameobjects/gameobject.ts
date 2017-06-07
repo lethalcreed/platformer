@@ -5,6 +5,7 @@ class GameObject {
 
     public x: number;
     public y: number;
+    private speed:number;
     public width: number;
     public height: number;
     protected div: HTMLElement;
@@ -20,6 +21,9 @@ class GameObject {
     }
 
     public draw(){
+
+        this.x -= 1;
+
         this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";
     }
 

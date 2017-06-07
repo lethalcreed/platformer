@@ -5,7 +5,7 @@ class Character {
     public x: number;
     public y: number;
     public hat: Hat;
-    public xspeed: number;
+    public static xspeed: number;
     public yspeed: number;
     public width:number;
     public height: number;
@@ -18,7 +18,7 @@ class Character {
 
         this.width = 24;
         this.height = 40;
-        this.xspeed = 0;
+        Character.xspeed = 0;
         this.yspeed = 0;
         // Base 1 (background) start values
         // this.x = 100;

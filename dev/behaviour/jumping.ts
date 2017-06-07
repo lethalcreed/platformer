@@ -17,12 +17,12 @@ class Jumping implements Behaviour {
     }
 
     draw() {
-        this.char.x += this.char.xspeed;
+        this.char.x += Character.xspeed;
         this.char.y += this.jumpDirection;
 
         if (this.ydirection == "up") {
             this.jumpHeight++;
-            if (this.jumpHeight > 35) {
+            if (this.jumpHeight > 40) {
                 this.ydirection = "down";
             }
         } else if (this.ydirection == "down") {
@@ -44,11 +44,11 @@ class Jumping implements Behaviour {
 
     }
     onKeyUp(e: KeyboardEvent) {
-        if (e.key == 'ArrowRight' && this.char.behaviour instanceof Jumping) {
+        if (e.keyCode == Enumeration.Keys.RIGHT && this.char.behaviour instanceof Jumping) {
 
             this.previous_state = "idle";
         }
-        if (e.key == 'ArrowLeft' && this.char.behaviour instanceof Jumping) {
+        if (e.keyCode == Enumeration.Keys.LEFT && this.char.behaviour instanceof Jumping) {
 
             this.previous_state = "idle";
         }
