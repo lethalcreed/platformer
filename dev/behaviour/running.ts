@@ -1,6 +1,6 @@
 class Running implements Behaviour {
-    char: Character;
 
+    char: Character;
     private direction: string;
 
     constructor(c: Character, direction: string) {
@@ -15,30 +15,20 @@ class Running implements Behaviour {
         }
     }
 
+    update() {
+        if (this.char.keyState[32]) {
+            this.char.behaviour = new Jumping(this.char, "running", this.direction);
+        } else if (this.char.keyState[37]) {
+            this.char.xspeed = -2;
+        } else if (this.char.keyState[39]) {
+            this.char.xspeed = 2;
+        } else {
+            this.char.xspeed = 0;
+            this.char.behaviour = new Idle(this.char);
+        }
+    }
+
     draw() {
         this.char.x += this.char.xspeed;
-    }
-
-    onKeyDown(e: KeyboardEvent) {
-        if (e.key == 'ArrowRight' && this.char.behaviour instanceof Running) {
-            this.char.xspeed = 2;
-        }
-        if (e.key == 'ArrowLeft' && this.char.behaviour instanceof Running) {
-            this.char.xspeed = -2;
-        }
-        if (e.key == ' ' && this.char.behaviour instanceof Running) {
-            this.char.behaviour = new Jumping(this.char, "running", this.direction);
-        }
-    }
-
-    onKeyUp(e: KeyboardEvent) {
-        if (e.key == 'ArrowRight' && this.char.behaviour instanceof Running) {
-            this.char.xspeed = 0;
-            this.char.behaviour = new Idle(this.char);
-        }
-        if (e.key == 'ArrowLeft' && this.char.behaviour instanceof Running) {
-            this.char.xspeed = 0;
-            this.char.behaviour = new Idle(this.char);
-        }
     }
 }

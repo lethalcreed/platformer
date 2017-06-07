@@ -1,4 +1,5 @@
 class Dying implements Behaviour {
+
     char: Character;
     private jumpDirection: number = -3;
     private jumpHeight: number = 0;
@@ -10,10 +11,11 @@ class Dying implements Behaviour {
         this.char.div.className = "dying";
     }
 
+    update() {
+    }
+
     draw() {
-
         this.char.y += this.jumpDirection;
-
         if (this.direction == "up") {
             this.jumpHeight++;
             if (this.jumpHeight > 25) {
@@ -26,12 +28,5 @@ class Dying implements Behaviour {
                 Game.getInstance().gameOver();
             }
         }
-    }
-
-    onKeyDown(e: KeyboardEvent) {
-
-    }
-    onKeyUp(e: KeyboardEvent) {
-
     }
 }

@@ -5,7 +5,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var Character = (function () {
     function Character(parent) {
-        var _this = this;
+        this.keyState = {};
         this.div = document.createElement("character");
         parent.appendChild(this.div);
         this.behaviour = new Idle(this);
@@ -16,16 +16,17 @@ var Character = (function () {
         this.x = 50;
         this.y = 465;
         this.hat = new Hat(this.div);
-        window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
-        window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
+        window.addEventListener('keydown', this.onKeyDown.bind(this));
+        window.addEventListener('keyup', this.onKeyUp.bind(this));
     }
     Character.prototype.onKeyDown = function (e) {
-        this.behaviour.onKeyDown(e);
+        this.keyState[e.keyCode || e.which] = true;
     };
     Character.prototype.onKeyUp = function (e) {
-        this.behaviour.onKeyUp(e);
+        this.keyState[e.keyCode || e.which] = false;
     };
     Character.prototype.draw = function () {
+        this.behaviour.update();
         this.behaviour.draw();
         this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";
         this.hat.draw();
@@ -117,6 +118,8 @@ var Dying = (function () {
         this.char = c;
         this.char.div.className = "dying";
     }
+    Dying.prototype.update = function () {
+    };
     Dying.prototype.draw = function () {
         this.char.y += this.jumpDirection;
         if (this.direction == "up") {
@@ -133,35 +136,29 @@ var Dying = (function () {
             }
         }
     };
-    Dying.prototype.onKeyDown = function (e) {
-    };
-    Dying.prototype.onKeyUp = function (e) {
-    };
     return Dying;
 }());
 var Idle = (function () {
     function Idle(c) {
         this.char = c;
     }
-    Idle.prototype.draw = function () {
-        this.char.xspeed = 0;
-        this.char.div.className = "idle";
-    };
-    Idle.prototype.onKeyDown = function (e) {
-        if (e.key == ' ' && this.char.behaviour instanceof Idle) {
+    Idle.prototype.update = function () {
+        if (this.char.keyState[32]) {
             this.char.behaviour = new Jumping(this.char, "idle", "idle");
         }
-        else if (e.key == 'ArrowRight' && this.char.behaviour instanceof Idle) {
-            this.char.behaviour = new Running(this.char, "right");
-        }
-        else if (e.key == 'ArrowLeft' && this.char.behaviour instanceof Idle) {
+        else if (this.char.keyState[37]) {
             this.char.behaviour = new Running(this.char, "left");
         }
-        else if (e.key == 'Control' && this.char.behaviour instanceof Idle) {
+        else if (this.char.keyState[39]) {
+            this.char.behaviour = new Running(this.char, "right");
+        }
+        else if (this.char.keyState[17]) {
             this.char.behaviour = new Dying(this.char);
         }
     };
-    Idle.prototype.onKeyUp = function (e) {
+    Idle.prototype.draw = function () {
+        this.char.xspeed = 0;
+        this.char.div.className = "idle";
     };
     return Idle;
 }());
@@ -175,6 +172,14 @@ var Jumping = (function () {
         this.xdirection = xdirection;
         this.char.div.className = "jumping";
     }
+    Jumping.prototype.update = function () {
+        if (this.char.keyState[37]) {
+            this.previous_state = "idle";
+        }
+        else if (this.char.keyState[39]) {
+            this.previous_state = "idle";
+        }
+    };
     Jumping.prototype.draw = function () {
         this.char.x += this.char.xspeed;
         this.char.y += this.jumpDirection;
@@ -199,16 +204,6 @@ var Jumping = (function () {
             }
         }
     };
-    Jumping.prototype.onKeyDown = function (e) {
-    };
-    Jumping.prototype.onKeyUp = function (e) {
-        if (e.key == 'ArrowRight' && this.char.behaviour instanceof Jumping) {
-            this.previous_state = "idle";
-        }
-        if (e.key == 'ArrowLeft' && this.char.behaviour instanceof Jumping) {
-            this.previous_state = "idle";
-        }
-    };
     return Jumping;
 }());
 var Running = (function () {
@@ -223,29 +218,23 @@ var Running = (function () {
             this.char.xspeed = -2;
         }
     }
-    Running.prototype.draw = function () {
-        this.char.x += this.char.xspeed;
-    };
-    Running.prototype.onKeyDown = function (e) {
-        if (e.key == 'ArrowRight' && this.char.behaviour instanceof Running) {
-            this.char.xspeed = 2;
-        }
-        if (e.key == 'ArrowLeft' && this.char.behaviour instanceof Running) {
-            this.char.xspeed = -2;
-        }
-        if (e.key == ' ' && this.char.behaviour instanceof Running) {
+    Running.prototype.update = function () {
+        if (this.char.keyState[32]) {
             this.char.behaviour = new Jumping(this.char, "running", this.direction);
         }
+        else if (this.char.keyState[37]) {
+            this.char.xspeed = -2;
+        }
+        else if (this.char.keyState[39]) {
+            this.char.xspeed = 2;
+        }
+        else {
+            this.char.xspeed = 0;
+            this.char.behaviour = new Idle(this.char);
+        }
     };
-    Running.prototype.onKeyUp = function (e) {
-        if (e.key == 'ArrowRight' && this.char.behaviour instanceof Running) {
-            this.char.xspeed = 0;
-            this.char.behaviour = new Idle(this.char);
-        }
-        if (e.key == 'ArrowLeft' && this.char.behaviour instanceof Running) {
-            this.char.xspeed = 0;
-            this.char.behaviour = new Idle(this.char);
-        }
+    Running.prototype.draw = function () {
+        this.char.x += this.char.xspeed;
     };
     return Running;
 }());

@@ -16,6 +16,14 @@ class Jumping implements Behaviour {
         this.char.div.className = "jumping";
     }
 
+    update() {
+        if (this.char.keyState[37]) {
+            this.previous_state = "idle";
+        } else if (this.char.keyState[39]) {
+            this.previous_state = "idle";
+        }
+    }
+
     draw() {
         this.char.x += this.char.xspeed;
         this.char.y += this.jumpDirection;
@@ -37,20 +45,6 @@ class Jumping implements Behaviour {
                     this.char.behaviour = new Idle(this.char);
                 }
             }
-        }
-    }
-
-    onKeyDown(e: KeyboardEvent) {
-
-    }
-    onKeyUp(e: KeyboardEvent) {
-        if (e.key == 'ArrowRight' && this.char.behaviour instanceof Jumping) {
-
-            this.previous_state = "idle";
-        }
-        if (e.key == 'ArrowLeft' && this.char.behaviour instanceof Jumping) {
-
-            this.previous_state = "idle";
         }
     }
 }
