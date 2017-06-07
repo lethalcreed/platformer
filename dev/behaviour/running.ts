@@ -1,6 +1,6 @@
 class Running implements Behaviour {
-    char: Character;
 
+    char: Character;
     private direction: string;
 
     constructor(c: Character, direction: string) {
@@ -15,6 +15,7 @@ class Running implements Behaviour {
         }
     }
 
+<<<<<<< HEAD
     draw() {
         this.char.x += Character.xspeed;
     }
@@ -38,7 +39,22 @@ class Running implements Behaviour {
         }
         if (e.keyCode == Enumeration.Keys.LEFT && this.char.behaviour instanceof Running) {
             Character.xspeed = 0;
+=======
+    update() {
+        if (this.char.keyState[32]) {
+            this.char.behaviour = new Jumping(this.char, "running", this.direction);
+        } else if (this.char.keyState[37]) {
+            this.char.xspeed = -2;
+        } else if (this.char.keyState[39]) {
+            this.char.xspeed = 2;
+        } else {
+            this.char.xspeed = 0;
+>>>>>>> 4f5d8f9d6b597017ddd7a0a910f26ebf604f5826
             this.char.behaviour = new Idle(this.char);
         }
+    }
+
+    draw() {
+        this.char.x += this.char.xspeed;
     }
 }

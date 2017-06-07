@@ -7,8 +7,9 @@ class Character {
     public hat: Hat;
     public static xspeed: number;
     public yspeed: number;
-    public width:number;
+    public width: number;
     public height: number;
+    public keyState: any = {};
 
     constructor(parent: HTMLElement) {
         this.div = document.createElement("character");
@@ -30,19 +31,21 @@ class Character {
 
         this.hat = new Hat(this.div);
 
-        window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e));
-        window.addEventListener("keyup", (e: KeyboardEvent) => this.onKeyUp(e));
+        window.addEventListener('keydown', this.onKeyDown.bind(this));
+        window.addEventListener('keyup', this.onKeyUp.bind(this));
     }
 
     private onKeyDown(e: KeyboardEvent): void {
-        this.behaviour.onKeyDown(e);
+        this.keyState[e.keyCode || e.which] = true;
     }
-        private onKeyUp(e: KeyboardEvent): void {
-        this.behaviour.onKeyUp(e);
-    }
-    public draw(): void {
-        this.behaviour.draw();
 
+    private onKeyUp(e: KeyboardEvent): void {
+        this.keyState[e.keyCode || e.which] = false;
+    }
+
+    public draw(): void {
+        this.behaviour.update();
+        this.behaviour.draw();
         this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";
         this.hat.draw();
     }
