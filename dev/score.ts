@@ -12,7 +12,7 @@ class Score implements Observer {
         parent.appendChild(this.score);
     }
 
-    public notify() {
+    public notify():void {
         let audio = new Audio('sounds/coin.wav');
         audio.play();
         this.coins++;

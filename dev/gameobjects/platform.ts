@@ -1,11 +1,11 @@
 class Platform {
 
-    public MatterBody;
-    public x;
-    public y;
-    public w;
-    public h;
-    private div;
+    public MatterBody: any;
+    public x: number;
+    public y: number;
+    public w: number;
+    public h: number;
+    private div: HTMLElement;
 
     constructor(parent: HTMLElement, x: number, y: number, w: number, h: number) {
 

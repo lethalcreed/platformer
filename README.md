@@ -18,13 +18,7 @@ Dit is een Platformer project met de volgende instellingen:
 
 - Om dit project te installeren kun je een fork doen van de repository. Deze map moet je dan op jou localhost plaatsen. Afhankelijk van welk programma je gebruikt.
 - Daarna moet je de TS files compilen. Deze komen dan terecht in de Docs folder. Door naar deze folder te navigeren kun je de game lokaal bekijken.
-
-
-## Sidenotes
-
-- De muziek is eventueel uit te zetten door Game.Audio.play(); uit te commenten in screens/level1.ts op regel 12.
-- De game toont altijd eerst een start scherm. Daarna word level 1 geladen. Alle code voor het level is dus te vinden in screens/level1.ts
-
+- Matter.JS word gebruikt in deze game. Alle files hiervoor staan in de repository. Als deze niet goed werkt moet je Matter.js handmatig toevoegen aan het mapje docs/js.
 
 ## Uitwerking
 
@@ -35,6 +29,8 @@ Dit is een Platformer project met de volgende instellingen:
 - Static utility method: Deze word gebruikt in het bestand utilities.ts. Hierin staat de functie waarmee collision tussen een gameobject en de speler kan worden gedetecteerd.
 - Singleton: De class Game in game.ts is een singleton. Zodat ik op iedere plek in de game gameover() kan aanroepen. 
 - Strategy: Deze word gebruikt bij de character om het gedrag te scheiden uit de rest van de character code. Alle gedragstypes en de interface ervoor zijn te vinden in het behaviour mapje.
+- Observer pattern: Deze word gebruikt door de score en het level. Het level is de observable. De score is de Observer. Deze krijgt wordt genotifyed wanneer de speler een coin op pakt. De score verhoogt zichzelf dan
+- Enumerations & Namespaces: De key codes van de toetsen die gebruikt worden om de game te besturen zijn enumerations in hun eigen namespace. Deze zijn te vinden in enum.ts
 
 ### PRG04
 
@@ -43,13 +39,13 @@ Dit is een Platformer project met de volgende instellingen:
 -   Inheritance: Het gameobject spike erft over van gameobjects.ts. Deze zijn te vinden in de map Gameobjects.
 
 
-## Klassendiagram:
+## Klassendiagram Week 4:
 
-![Klassendiagram](Platformer%20PRG08.png?raw=true "Klassendiagram")
+![Klassendiagram](week4.png?raw=true "Klassendiagram")
 
 
 
-## Peerbeoordeling
+## Peerbeoordeling Week 4
 
 - Singleton: Van de game is een singleton gemaakt en de game instance is toegepast zoals we deze geleerd hebben.
 - Static utils class: Alle deze methods zijn static en de collision method mag worden toegepast op de player met alle gameobjects.
@@ -59,6 +55,19 @@ Dit is een Platformer project met de volgende instellingen:
 Conclusie: Platformer krijgt van mij een dikke voldoende, alle vereisten zijn behandeld en verwerkt.
 
 
-## Verbetering
+## Verbetering Week 4
 
 Hangende input van ingedrukte toetsen verbeterd, het inhouden van een toets op het keyboard zorgt dat de player nu meteen kan lopen door gebruik te maken van keystates in de gameloop in plaats van keyevents. Om dit toe te passen heb ik de gameloop verdeeld in update() en draw() stappen, de update() handeld de behavior en de draw() doet de visuals.
+
+## Klassendiagram Week 7: 
+
+![Klassendiagram](week7.png?raw=true "Klassendiagram")
+
+
+## Peerbeoordeling Week 7
+
+
+
+## Verbetering Week 7
+
+
