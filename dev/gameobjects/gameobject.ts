@@ -1,6 +1,3 @@
-/**
- * GameObject
- */
 class GameObject {
 
     public x: number;
@@ -8,7 +5,7 @@ class GameObject {
     private speed:number;
     public width: number;
     public height: number;
-    protected div: HTMLElement;
+    public div: HTMLElement;
 
     constructor(parent: HTMLElement, name: string, x: number, y: number, w: number, h: number) {
         this.x = x;
@@ -21,10 +18,11 @@ class GameObject {
     }
 
     public draw(){
-
-        this.x -= 1;
-
         this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";
+
+        if(this.x < (0 - this.width)){
+            this.div.remove();
+        }
     }
 
 

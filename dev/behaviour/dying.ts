@@ -1,7 +1,6 @@
 class Dying implements Behaviour {
 
     char: Character;
-    private jumpDirection: number = -3;
     private jumpHeight: number = 0;
     private direction: string = "up";
 
@@ -12,19 +11,15 @@ class Dying implements Behaviour {
     }
 
     update() {
-    }
-
-    draw() {
-        this.char.y += this.jumpDirection;
         if (this.direction == "up") {
-            this.jumpHeight++;
-            if (this.jumpHeight > 25) {
-                this.direction = "down";
+            if (this.jumpHeight == 0) {
+                Game.audio.pause();
+                let audio = new Audio('sounds/dead.wav');
+                audio.play();
+                Matter.Body.applyForce(this.char.character, { x: 0, y: 0 }, { x: 0, y: -0.05 });0
             }
-        } else if (this.direction == "down") {
-            this.jumpDirection = 3;
-            if (this.char.y > 600) {
-                this.char.behaviour = new Idle(this.char);
+            this.jumpHeight++;
+            if (this.jumpHeight > 60) {
                 Game.getInstance().gameOver();
             }
         }

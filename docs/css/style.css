@@ -44,6 +44,13 @@ start{
     background-size: 100%;
     background-image: url(../images/start.gif);
 }
+win{
+    width: 800px;
+    height: 600px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-image: url(../images/win.png);
+}
 gameover{
     width: 800px;
     height: 600px;
@@ -56,7 +63,7 @@ level1{
     height:inherit;
     background-repeat: no-repeat;
     background-size: 150%;
-    background-image: url(../images/base2.png);
+    background-image: url(../images/base.png);
 }
 
 start_character{
@@ -98,4 +105,29 @@ spike{
 }
 .dying{
     background-image: url(../images/character/dying.png);
+}
+
+platform{
+    background-color: transparent;
+    display: block;
+    position: absolute;
+}
+
+score{
+    z-index: 5;
+    color: white;
+    left: 5px;
+}
+
+coin {
+    background-image: url(../images/coin.gif);
+    background-size: 100%;
+    width: 15px;
+    height: 15px;
+}
+
+finalScore{
+    top: 20%;
+    left: calc(50% - 77px);
+    color: white;
 }

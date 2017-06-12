@@ -4,7 +4,7 @@ class Game {
     private screen: BaseScreen;
 
     private static instance: Game;
-    private score:number = 0;
+    private score: number = 0;
     public static audio;
 
     private constructor() {
@@ -27,10 +27,16 @@ class Game {
         this.screen = new Level1();
     }
 
-    public gameOver():void{
-        document.getElementById("current_level").remove();  
-        Game.audio.pause();  
+    public gameOver(): void {
+        document.getElementById("current_level").remove();
+        Game.audio.pause();
         this.screen = new GameOver();
+    }
+
+    public win(): void {
+        document.getElementById("current_level").remove();
+        Game.audio.pause();
+        this.screen = new Winner();
     }
 
 }
