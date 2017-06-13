@@ -5,7 +5,7 @@ class StartScreen extends BaseScreen {
         super('start');
 
         Game.audio = new Audio('sounds/menu.mp3');
-        // Game.audio.play();
+        Game.audio.play();
         Game.audio.loop = true;
 
         // sub elementen in de screen div. dan kunnen we alles in 1x weghalen

@@ -39,9 +39,9 @@ Dit is een Platformer project met de volgende instellingen:
 -   Inheritance: Het gameobject spike erft over van gameobjects.ts. Deze zijn te vinden in de map Gameobjects.
 
 
-## Klassendiagram Week 4:
+## Klassendiagram:
 
-![Klassendiagram](week4.png?raw=true "Klassendiagram")
+![Klassendiagram](week7.png?raw=true "Klassendiagram")
 
 
 
@@ -58,10 +58,6 @@ Conclusie: Platformer krijgt van mij een dikke voldoende, alle vereisten zijn be
 ## Verbetering Week 4
 
 Hangende input van ingedrukte toetsen verbeterd, het inhouden van een toets op het keyboard zorgt dat de player nu meteen kan lopen door gebruik te maken van keystates in de gameloop in plaats van keyevents. Om dit toe te passen heb ik de gameloop verdeeld in update() en draw() stappen, de update() handeld de behavior en de draw() doet de visuals.
-
-## Klassendiagram Week 7: 
-
-![Klassendiagram](week7.png?raw=true "Klassendiagram")
 
 
 ## Peerbeoordeling Week 7

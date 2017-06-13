@@ -53,6 +53,7 @@ var StartScreen = (function (_super) {
     function StartScreen() {
         _super.call(this, 'start');
         Game.audio = new Audio('sounds/menu.mp3');
+        Game.audio.play();
         Game.audio.loop = true;
         var btn = document.createElement("gamebutton");
         this.div.appendChild(btn);
