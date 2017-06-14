@@ -31,6 +31,7 @@ Dit is een Platformer project met de volgende instellingen:
 - Strategy: Deze word gebruikt bij de character om het gedrag te scheiden uit de rest van de character code. Alle gedragstypes en de interface ervoor zijn te vinden in het behaviour mapje.
 - Observer pattern: Deze word gebruikt door de score en het level. Het level is de observable. De score is de Observer. Deze krijgt wordt genotifyed wanneer de speler een coin op pakt. De score verhoogt zichzelf dan
 - Enumerations & Namespaces: De key codes van de toetsen die gebruikt worden om de game te besturen zijn enumerations in hun eigen namespace. Deze zijn te vinden in enum.ts
+- Abstract: De class Utils is abstract. Dit is zodat er geen instance van gemaakt kan worden. 
 
 ### PRG04
 
