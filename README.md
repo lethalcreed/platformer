@@ -63,8 +63,17 @@ Hangende input van ingedrukte toetsen verbeterd, het inhouden van een toets op h
 
 ## Peerbeoordeling Week 7
 
+Youri, je game is tof! Vet gedaan. Ik zie dat de game helemaal af is, Van begin tot eind is het spel speelbaar. Ik ben ook nog geen bugs tegengekomen. In je git project staat een klassendiagram, hierin is de structuur van je game goed uitgelegd. Hier kan ik ook in aflezen dat alle criteria in de game zitten. 
 
+Zo heb je bijvoorbeeld matter.js als library gebruikt in je spel. Ook heb je encapsulation (private variables in verschillende objecten), Composition (Character heeft een hat) en inheritance gebruikt (Gameobject wordt een aantal keer ge-extend). 
 
-## Verbetering Week 7
+De game zelf is gebouwd als een singleton. Doordat je score heel het level observeert maak je gebruik van een observer. En door de player verschillende states te geven maak je gebruik van het strategy pattern.
 
+Verder bevat je game een interface, namelijk in de Observer class bijvoorbeeld. De collision van je player wordt afgehandeld als een static function. En ook die class uit je utilities is abstract.
+
+Je hebt je keys van je keyboard in een enumeratie gezet, dit zit tegelijk ook in een namespace. En daarnaast is het Array dat ge-extende game objects ontvangt een voorbeeld van Polymorphism.
+
+Uiteindelijk loopt heel de game op een Gameloop en dit stuk schrijf ik in de README.md met verder info hierboven ^.
+
+Tof spel gemaakt Youri, goed gedaan!
 
